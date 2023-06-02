@@ -6,12 +6,15 @@ const getStats = require('../middlewares/GetStats');
 const comment = require('../middlewares/SendComments');
 const auth = require('../middlewares/Authorization');
 
-router.use(auth);
+const bodyParser = require('body-parser');
+router.use(bodyParser.json());
+
+router.use(auth.checkApiKey);
 
 router.get("/", getMainPage);
 
 router.get("/stats", getStats);
 
-router.post("/comments", comment);
+router.post("/comments", comment.validateComment, comment.sendComment);
 
 module.exports = router;
