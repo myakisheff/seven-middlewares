@@ -1,35 +1,33 @@
 const express = require('express');
-const router = express.Router();
 
 let comments = [];
-
-const bodyParser = require('body-parser');
-
-router.use(bodyParser.json());
+let comm = {};
 
 function sendComment(req, res, next){
-    const name = req.body;
-  
-    console.log(name);
+    const { name, comment } = req.body;
 
-  comments.push(name);
-  
-  res.json(comments);
+    comm.name = name;
+    comm.comment = comment;
+
+    comments.push(comm);
+
+    res.json(comments);
 
   next();
 }
 
 function validateComment(req, res,next) {
-    const { name } = req.body;
+    const { name, comment } = req.body;
   
-    if (!name || name.trim() === '') {
+    if (!name || name.trim() === '' || !comment || comment.trim() === '') {
       return res.status(400).send('Comment cannot be empty');
     }
-    
-    req.body = name; // Записываем отредактированный комментарий в объект запроса
+
     next();
-    
-  }
+}
 
 
-module.exports = sendComment;
+module.exports = {
+  sendComment,
+  validateComment
+};
