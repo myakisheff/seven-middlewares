@@ -17,4 +17,10 @@ router.get("/stats", getStats);
 
 router.post("/comments", comment.validateComment, comment.sendComment);
 
+//8
+const controllers = require('../controllers/ctrls');
+/* router.get('/comments/:id', controllers.getCommentsById); */
+router.post('/comments', controllers.createComment);
+/* router.put('/comments/:id', controllers.updateComment);
+router.delete('/comments/:id', controllers.deleteComment); */
 module.exports = router;

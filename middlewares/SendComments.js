@@ -1,13 +1,14 @@
 const express = require('express');
+const Comment = require('../models/comment');
 
 let comments = [];
 let comm = {};
 
 function sendComment(req, res, next){
-    const { name, comment } = req.body;
+    const { name, content } = req.body;
 
     comm.name = name;
-    comm.comment = comment;
+    comm.content = content;
 
     comments.push(comm);
 
@@ -17,9 +18,9 @@ function sendComment(req, res, next){
 }
 
 function validateComment(req, res,next) {
-    const { name, comment } = req.body;
+    const { name, content } = req.body;
   
-    if (!name || name.trim() === '' || !comment || comment.trim() === '') {
+    if (!name || name.trim() === '' || !content || content.trim() === '') {
       return res.status(400).send('Comment cannot be empty');
     }
 
