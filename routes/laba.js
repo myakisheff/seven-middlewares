@@ -19,6 +19,8 @@ router.get("/", getMainPage);
 
 router.get("/stats", getStats);
 
+router.get("/comments/:id", dataB.getCommentsById);
+
 router.get("/comments", dataB.getComments);
 
 router.post("/comments", comment.validateComment, comment.sendComment, dataB.addComment);
