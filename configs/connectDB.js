@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+/* const mongoose = require('mongoose');
 
 async function getConnection() {
     mongoose.connect('mongodb://127.0.0.1:27017/comments')
@@ -6,5 +6,20 @@ async function getConnection() {
     .catch(err => console.error(err));
 }
 
+/////----/////
 
-module.exports = getConnection;
+module.exports = getConnection; */
+
+/* const { MongoClient } = require('mongodb');
+
+async function getConnection() {
+    const client = new MongoClient('127.0.0.1:27017');
+
+    console.log('db-hi');
+
+    await client.connect();
+
+    console.log('db-end');
+}
+
+module.exports = getConnection; */

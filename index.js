@@ -3,8 +3,6 @@ const laba = require('./routes/laba');
 const morgan = require('morgan');
 const helmet = require('helmet');
 
-const Comment = require('./models/comment');
-
 const mongoose = require('mongoose');
 
 mongoose.connect('mongodb://127.0.0.1:27017/comments')
@@ -13,23 +11,10 @@ mongoose.connect('mongodb://127.0.0.1:27017/comments')
 
 const app = express();
 
-app.get('/laba/comments', async (req, res) => {
-
-    try {
-        const comments = await Comment.find();
-        res.render('comment', {
-        name: req.comment.name,
-        title: 'Главная страница',
-        comment: comments
-        });
-    } catch (error) {
-        console.log(error);
-    }
-    
-});
-
 app.use(morgan(':method :url :status - :response-time ms'));
 app.use(helmet());
+
+app.set('view engine', 'ejs');
 
 const hostname = '127.0.0.1';
 const port = 3000;

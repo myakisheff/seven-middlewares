@@ -5,22 +5,22 @@ const getMainPage = require('../middlewares/GetMainPage');
 const getStats = require('../middlewares/GetStats');
 const comment = require('../middlewares/SendComments');
 const auth = require('../middlewares/Authorization');
+const dataB = require('../services/db')
+
+/* const connect = require('../configs/connectDB');
+router.use(connect); */
 
 const bodyParser = require('body-parser');
 router.use(bodyParser.json());
 
-router.use(auth.checkApiKey);
+//router.use(auth.checkApiKey);
 
 router.get("/", getMainPage);
 
 router.get("/stats", getStats);
 
-router.post("/comments", comment.validateComment, comment.sendComment);
+router.get("/comments", dataB.getComments);
 
-//8
-const controllers = require('../controllers/ctrls');
-/* router.get('/comments/:id', controllers.getCommentsById); */
-router.post('/comments', controllers.createComment);
-/* router.put('/comments/:id', controllers.updateComment);
-router.delete('/comments/:id', controllers.deleteComment); */
+router.post("/comments", comment.validateComment, comment.sendComment, dataB.addComment);
+
 module.exports = router;

@@ -1,6 +1,3 @@
-const express = require('express');
-const Comment = require('../models/comment');
-
 let comments = [];
 let comm = {};
 
