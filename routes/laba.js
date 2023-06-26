@@ -5,10 +5,7 @@ const getMainPage = require('../middlewares/GetMainPage');
 const getStats = require('../middlewares/GetStats');
 const comment = require('../middlewares/SendComments');
 const auth = require('../middlewares/Authorization');
-const dataB = require('../services/db')
-
-/* const connect = require('../configs/connectDB');
-router.use(connect); */
+const commentControllers = require('../controllers/ctrls')
 
 const bodyParser = require('body-parser');
 router.use(bodyParser.json());
@@ -19,10 +16,10 @@ router.get("/", getMainPage);
 
 router.get("/stats", getStats);
 
-router.get("/comments/:id", dataB.getCommentsById);
+router.get("/comment/:id", commentControllers.getOneComment);
 
-router.get("/comments", dataB.getComments);
+router.get("/comments", commentControllers.getAllComments);
 
-router.post("/comments", comment.validateComment, comment.sendComment, dataB.addComment);
+router.post("/comments", comment.validateComment, comment.sendComment, commentControllers.createComment);
 
 module.exports = router;

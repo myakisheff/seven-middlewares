@@ -15,9 +15,9 @@ function sendComment(req, res, next){
 }
 
 function validateComment(req, res,next) {
-    const { name, content } = req.body;
+    const { name, comment } = req.body;
   
-    if (!name || name.trim() === '' || !content || content.trim() === '') {
+    if (!name || name.trim() === '' || !comment || comment.trim() === '') {
       return res.status(400).send('Comment cannot be empty');
     }
 

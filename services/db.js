@@ -1,9 +1,33 @@
 const Comment = require('../models/comment');
-const path = require('path');
 
- const createPath = (page) => path.resolve(__dirname, '../views', `${page}.ejs`);
+const connect = require('../configs/connectDB');
 
-async function getComments(req, res, next) {
+async function getComments() {
+  const db = await connect();
+  const collection = db.collection('comments');
+  const comms = await collection.find().toArray();
+  return comms;
+}
+
+async function addComment(comm) {
+  const db = await connect();
+  const collection = db.collection('comments');
+  await collection.insertOne(comm);
+}
+
+async function getCommentsById(id) {
+  const db = await connect();
+  const collection = db.collection('comments');
+  const comment = await collection.findOne({ _id: id });
+  console.log(comment);
+  if(!comment)
+  {
+    throw new Error("comment not found");
+  }
+  return comment;
+}
+
+/* async function getComments(req, res, next) {
   Comment
     .find()
     .then((comments) => {
@@ -12,9 +36,9 @@ async function getComments(req, res, next) {
     .catch((error) => {
       console.log(error);
     })
-}
+} */
 
-async function getCommentsById(req, res, next) {
+/* async function getCommentsById(req, res, next) {
   Comment.exists({ _id: req.params.id }).then(exists => {
     if (exists) {
       Comment
@@ -37,21 +61,9 @@ async function getCommentsById(req, res, next) {
     console.log(error);
   }
   )
-/* 
-  const result = await Comment.findOne({ _id: req.params.id }).select("_id").lean();
-  if (result) {
-    Comment
-    .findById(req.params.id)
-    .then((comment) => {
-      res.render(createPath('comment'),{ comment });
-    })
-    .catch((error) => {
-      console.log(error);
-    })
-  } */
-}
+} */
 
-async function addComment(req, res, next) {
+/* async function addComment(req, res, next) {
     const { name, content } = req.body;
 
     const commentDB = new Comment({name, content});
@@ -62,7 +74,7 @@ async function addComment(req, res, next) {
     .catch((error) => {
         console.log(error);
     });
-}
+} */
 
 module.exports = {
     getComments,

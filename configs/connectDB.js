@@ -1,25 +1,19 @@
 /* const mongoose = require('mongoose');
 
 async function getConnection() {
-    mongoose.connect('mongodb://127.0.0.1:27017/comments')
+    await mongoose.connect('mongodb://127.0.0.1:27017/comments')
     .then((res) => console.log('Connected to MongoDB'))
     .catch(err => console.error(err));
 }
+*/
 
-/////----/////
-
-module.exports = getConnection; */
-
-/* const { MongoClient } = require('mongodb');
+const MongoClient = require('mongodb').MongoClient;
+const url = 'mongodb://127.0.0.1:27017/comments';
 
 async function getConnection() {
-    const client = new MongoClient('127.0.0.1:27017');
-
-    console.log('db-hi');
-
-    await client.connect();
-
-    console.log('db-end');
+    const client = await MongoClient.connect(url, { useUnifiedTopology: true });
+    const db = client.db('comments');
+    return db;
 }
 
-module.exports = getConnection; */
+module.exports = getConnection;

@@ -3,12 +3,6 @@ const laba = require('./routes/laba');
 const morgan = require('morgan');
 const helmet = require('helmet');
 
-const mongoose = require('mongoose');
-
-mongoose.connect('mongodb://127.0.0.1:27017/comments')
-    .then((res) => console.log('Connected to MongoDB'))
-    .catch(err => console.error(err));
-
 const app = express();
 
 app.use(morgan(':method :url :status - :response-time ms'));
