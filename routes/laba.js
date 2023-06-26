@@ -17,6 +17,7 @@ router.get("/", getMainPage);
 router.get("/stats", getStats);
 
 router.get("/comment/:id", commentControllers.getOneComment);
+router.get("/comment", commentControllers.getOneComment);
 
 router.get("/comments", commentControllers.getAllComments);
 

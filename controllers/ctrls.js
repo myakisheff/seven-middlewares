@@ -1,6 +1,6 @@
 const userService = require('../services/db');
-
 const path = require('path');
+
 const createPath = (page) => path.resolve(__dirname, '../views', `${page}.ejs`);
 
 async function createComment(req, res, next) {
@@ -29,9 +29,8 @@ async function getOneComment(req, res, next) {
     comment = await userService.getCommentsById(req.params.id);
   }
   catch (err){
-    console.log(err);
     res.status(404);
-    res.send("<h1 style='text-align: center;'>404 Not Found</h1>")
+    res.send("<h1 style='text-align: center;'>404 Not Found</h1>");
   }
   res.render(createPath('comment'),{ comment });
 }

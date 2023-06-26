@@ -1,5 +1,5 @@
 const Comment = require('../models/comment');
-
+var ObjectId = require('mongodb').ObjectId;    
 const connect = require('../configs/connectDB');
 
 async function getComments() {
@@ -16,10 +16,9 @@ async function addComment(comm) {
 }
 
 async function getCommentsById(id) {
-  const db = await connect();
+  const db = await connect();  
   const collection = db.collection('comments');
-  const comment = await collection.findOne({ _id: id });
-  console.log(comment);
+  const comment = await collection.findOne({_id: new ObjectId(id) });
   if(!comment)
   {
     throw new Error("comment not found");

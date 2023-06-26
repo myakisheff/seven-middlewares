@@ -11,7 +11,7 @@
     <h1>Комментарии</h1>
     <ul>
         <% if (comments.length) { %>
-            <% comments.forEach(({id, name, content, createdAt}) => { %>
+            <% comments.forEach(({_id, name, content, createdAt}) => { %>
                 <li>
                     <b>Name: </b> <%= name %>
                 </li>
@@ -21,7 +21,7 @@
                 <li>
                     <b>Date: </b> <%= createdAt.toLocaleDateString() %>
                 </li>
-                <a href="comment/<%= id %>">Перейти</a>
+                <a href="comment/<%= _id %>">Перейти</a>
 
                 <br>
                 <br>

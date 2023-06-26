@@ -2,10 +2,10 @@ let comments = [];
 let comm = {};
 
 function sendComment(req, res, next){
-    const { name, content } = req.body;
+    const { name, comment } = req.body;
 
     comm.name = name;
-    comm.content = content;
+    comm.comment = comment;
 
     comments.push(comm);
 
